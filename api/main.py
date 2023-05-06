@@ -3,8 +3,10 @@ from fastapi import FastAPI
 from api.configs.Environment import get_environment_variables
 from api.metadata.Tags import Tags
 from api.models.BaseModel import init
-from api.routers.v1.AuthorRouter import AuthorRouter
-from api.routers.v1.BookRouter import BookRouter
+from api.routers.v1.PrepaidConsumptionTrackingRouter import PrepaidConsumptionTrackingRouter
+from api.routers.v1.PostpaidConsumptionTrackingRouter import PostpaidConsumptionTrackingRouter
+from api.routers.v1.PrepaidInvoiceRouter import PrepaidInvoiceRouter
+from api.routers.v1.PostpaidInvoiceRouter import PostpaidInvoiceRouter
 
 # Application Environment Configuration
 env = get_environment_variables()
@@ -17,8 +19,11 @@ app = FastAPI(
 )
 
 # Add Routers
-app.include_router(AuthorRouter)
-app.include_router(BookRouter)
+app.include_router(PostpaidConsumptionTrackingRouter)
+app.include_router(PostpaidInvoiceRouter)
+app.include_router(PrepaidConsumptionTrackingRouter)
+app.include_router(PrepaidInvoiceRouter)
+
 
 # Initialise Data Model Attributes
 init()
