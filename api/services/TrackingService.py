@@ -1,17 +1,17 @@
 from typing import List, Optional
 from fastapi import Depends
 from api.models.ConsumptionTracking import ConsumptionTracking
-from api.repositories.ConsumptionTrackingRepository import ConsumptionTrackingRepository
+from api.repositories.TrackingRepository import TrackingRepository
 from datetime import datetime
 from api.services.ExceptionService import ExceptionService
 
 
-class ConsumptionTrackingService:
-    consumptionTrackingRepository: ConsumptionTrackingRepository
+class TrackingService:
+    consumptionTrackingRepository: TrackingRepository
 
     def __init__(
         self,
-        consumptionTrackingRepository: ConsumptionTrackingRepository = Depends()
+        consumptionTrackingRepository: TrackingRepository = Depends()
     ) -> None:
         self.consumptionTrackingRepository = consumptionTrackingRepository
 

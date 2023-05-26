@@ -1,28 +1,28 @@
 from fastapi import FastAPI
-
-from api.configs.Environment import get_environment_variables
 from api.metadata.Tags import Tags
-from api.models.BaseModel import init
-from api.routers.v1.PrepaidConsumptionTrackingRouter import PrepaidConsumptionTrackingRouter
-from api.routers.v1.PostpaidConsumptionTrackingRouter import PostpaidConsumptionTrackingRouter
-from api.routers.v1.PrepaidInvoiceRouter import PrepaidInvoiceRouter
-from api.routers.v1.PostpaidInvoiceRouter import PostpaidInvoiceRouter
+from api.configs.BaseModel import init
+from api.configs.Environment import get_env_var
+from api.routers.v1.PrepaidInvoiceRouter import prepaidinvoiceRouter
+from api.routers.v1.PostpaidInvoiceRouter import postpaidinvoiceRouter
+from api.routers.v1.PrepaidTrackingRouter import prepaidtrackingRouter
+from api.routers.v1.PostpaidTrackingRouter import postpaidtrackingRouter
 
 # Application Environment Configuration
-env = get_environment_variables()
+env = get_env_var()
 
 # Core Application Instance
 app = FastAPI(
-    title=env.APP_NAME,
-    version=env.API_VERSION,
+    title=env.app_name,
+    description=env.app_desc,
+    version="0.0." + env.api_version,
     openapi_tags=Tags,
 )
 
 # Add Routers
-app.include_router(PostpaidConsumptionTrackingRouter)
-app.include_router(PostpaidInvoiceRouter)
-app.include_router(PrepaidConsumptionTrackingRouter)
-app.include_router(PrepaidInvoiceRouter)
+app.include_router(postpaidtrackingRouter)
+app.include_router(postpaidinvoiceRouter)
+app.include_router(prepaidtrackingRouter)
+app.include_router(prepaidinvoiceRouter)
 
 
 # Initialise Data Model Attributes

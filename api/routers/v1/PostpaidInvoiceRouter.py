@@ -1,12 +1,17 @@
 from typing import List
-
 from fastapi import APIRouter, Depends, status
-
+from api.configs.Environment import get_env_var
 from api.services.PostpaidInvoiceService import PostpaidInvoiceService
 
-PostpaidInvoiceRouter = APIRouter(prefix="/invoices/postpaid", tags=["postpaid invoices"])
+env = get_env_var()
+router_path = env.api_routers_prefix + env.api_version
 
-@PostpaidInvoiceRouter.post(
+postpaidinvoiceRouter = APIRouter(
+    prefix=router_path + "/invoices/postpaid",
+    tags=["Postpaid Invoicing"],
+)
+
+@postpaidinvoiceRouter.post(
     "/",
     status_code = status.HTTP_201_CREATED,
     summary = "Create postpaid invoice",
@@ -19,7 +24,7 @@ def create_postpaid_invoices(
     return postpaidInvoiceService.create_postpaid_invoices(tracking_number_list)
 
 
-@PostpaidInvoiceRouter.get(
+@postpaidinvoiceRouter.get(
     "/number",
     summary = "Get postpaid invoice by number",
     description = "Get postpaid invoice with the tracking number"
@@ -31,7 +36,7 @@ def get_postpaid_invoice_by_number(
     return postpaidInvoiceService.get_postpaid_invoice_by_number(invoice_number)
 
 
-@PostpaidInvoiceRouter.get(
+@postpaidinvoiceRouter.get(
     "/contract_number",
     summary = "Get postpaid invoice by contract number",
     description = "Get postpaid invoice with the contract number"
@@ -45,7 +50,7 @@ def get_postpaid_invoices_by_contract_number(
     return postpaidInvoiceService.get_postpaid_invoice_by_contract_number(contract_number, offset, limit)
 
 
-@PostpaidInvoiceRouter.get(
+@postpaidinvoiceRouter.get(
     "/contract_number/last",
     summary = "Get last postpaid invoice by contract number",
     description = "Get last postpaid invoice with the contract number"
@@ -57,7 +62,7 @@ def get_last_postpaid_invoice_by_contract_number(
     return postpaidInvoiceService.get_last_postpaid_invoice_by_contract_number(contract_number)
 
 
-@PostpaidInvoiceRouter.get(
+@postpaidinvoiceRouter.get(
     "/dunning",
     summary = "Dunning postpaid invoice by invoice number",
     description = "Dunning postpaid invoice with the invoice number"
@@ -69,7 +74,7 @@ def dunning_postpaid_invoice_by_number(
     return postpaidInvoiceService.dunning_postpaid_invoice_by_number(invoice_number)
 
 
-@PostpaidInvoiceRouter.delete(
+@postpaidinvoiceRouter.delete(
     "/number",
     summary = "Delete postpaid invoice by number",
     description = "Delete postpaid invoice with the invoice number"

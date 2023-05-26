@@ -1,20 +1,20 @@
 from typing import List, Optional
 from fastapi import Depends
 from api.models.ConsumptionTracking import ConsumptionTracking
-from api.repositories.ConsumptionTrackingRepository import ConsumptionTrackingRepository
-from api.schemas.pydantic.ConsumptionTrackingSchema import PrepaidCreateSchema, PrepaidInfoSchema
+from api.repositories.TrackingRepository import TrackingRepository
+from api.schemas.TrackingSchema import PrepaidCreateSchema, PrepaidInfoSchema
 from datetime import datetime
-from api.services.ConsumptionTrackingService import ConsumptionTrackingService
+from api.services.TrackingService import TrackingService
 from api.services.UtilsService import UtilsService
 from fastapi.encoders import jsonable_encoder
 
 
-class PrepaidTrackingService(ConsumptionTrackingService):
-    consumptionTrackingRepository: ConsumptionTrackingRepository
+class PrepaidTrackingService(TrackingService):
+    consumptionTrackingRepository: TrackingRepository
 
     def __init__(
             self,
-            consumptionTrackingRepository: ConsumptionTrackingRepository = Depends()
+            consumptionTrackingRepository: TrackingRepository = Depends()
     ) -> None:
         super().__init__(consumptionTrackingRepository)
         self.consumptionTrackingRepository = consumptionTrackingRepository

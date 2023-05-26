@@ -1,4 +1,4 @@
-from api.schemas.pydantic.PricingSchema import Slice, PostpaidPricing, PrepaidPricing
+from api.schemas.PricingSchema import Slice, PostpaidPricing, PrepaidPricing
 
 class PricingService:
     def __init__(self):

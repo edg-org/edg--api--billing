@@ -7,7 +7,7 @@ from datetime import datetime, date
 from api.services.InvoiceService import InvoiceService
 from api.services.ExceptionService import ExceptionService
 from api.services.PostpaidTrackingService import PostpaidTrackingService
-from api.schemas.pydantic.InvoiceSchema import PostpaidInfoSchema, Dunning
+from api.schemas.InvoiceSchema import PostpaidInfoSchema, Dunning
 from api.services.UtilsService import UtilsService
 from pydantic import parse_obj_as
 from fastapi.encoders import jsonable_encoder

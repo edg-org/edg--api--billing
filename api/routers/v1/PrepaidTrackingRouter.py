@@ -1,14 +1,19 @@
 from typing import List
-
 from fastapi import APIRouter, Depends, status
-
-from api.schemas.pydantic.ConsumptionTrackingSchema import PrepaidCreateSchema, PrepaidInfoSchema
-from api.services.PrepaidTrackingService import PrepaidTrackingService
+from api.configs.Environment import get_env_var
 from api.services.PrepaidInvoiceService import PrepaidInvoiceService
+from api.services.PrepaidTrackingService import PrepaidTrackingService
+from api.schemas.TrackingSchema import PrepaidCreateSchema, PrepaidInfoSchema
 
-PrepaidConsumptionTrackingRouter = APIRouter(prefix="/tracking/prepaid", tags=["prepaid consumption tracking"])
+env = get_env_var()
+router_path = env.api_routers_prefix + env.api_version
 
-@PrepaidConsumptionTrackingRouter.post(
+prepaidtrackingRouter = APIRouter(
+    prefix=router_path + "/tracking/prepaid",
+    tags=["Prepaid Consumption Tracking"],
+)
+
+@prepaidtrackingRouter.post(
     "/",
     status_code = status.HTTP_201_CREATED,
     summary = "Create prepaid tracking",
@@ -22,7 +27,7 @@ def create_prepaid_tracking(
     return prepaidTrackingService.create_prepaid_tracking(prepaid_list, prepaidInvoiceService)
 
 
-@PrepaidConsumptionTrackingRouter.get(
+@prepaidtrackingRouter.get(
     "/number",
     summary = "Get prepaid tracking by number",
     description = "Get prepaid tracking with the tracking number"
@@ -34,7 +39,7 @@ def get_prepaid_tracking_by_number(
     return prepaidTrackingService.get_prepaid_tracking_by_number(tracking_number)
 
 
-@PrepaidConsumptionTrackingRouter.get(
+@prepaidtrackingRouter.get(
     "/contract_number",
     summary = "Get prepaid tracking by contract number",
     description = "Get prepaid tracking with the contract number"
@@ -48,7 +53,7 @@ def get_prepaid_by_contract_number(
     return prepaidTrackingService.get_prepaid_tracking_by_contract_number(contract_number, offset, limit)
 
 
-@PrepaidConsumptionTrackingRouter.get(
+@prepaidtrackingRouter.get(
     "/contract_number/last",
     summary = "Get last prepaid tracking by contract number",
     description = "Get last prepaid tracking with the contract number"
@@ -60,7 +65,7 @@ def get_last_prepaid_by_contract_number(
     return prepaidTrackingService.get_last_prepaid_tracking_by_contract_number(contract_number)
 
 
-@PrepaidConsumptionTrackingRouter.delete(
+@prepaidtrackingRouter.delete(
     "/number",
     summary = "Delete prepaid tracking by number",
     description = "Delete prepaid tracking with the tracking number"

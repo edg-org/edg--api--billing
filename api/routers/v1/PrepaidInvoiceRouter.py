@@ -1,13 +1,17 @@
 from typing import List
-
 from fastapi import APIRouter, Depends, status
-
+from api.configs.Environment import get_env_var
 from api.services.PrepaidInvoiceService import PrepaidInvoiceService
 
-PrepaidInvoiceRouter = APIRouter(prefix="/invoices/prepaid", tags=["prepaid invoices"])
+env = get_env_var()
+router_path = env.api_routers_prefix + env.api_version
 
+prepaidinvoiceRouter = APIRouter(
+    prefix=router_path + "/invoices/prepaid",
+    tags=["Prepaid Invoicing"],
+)
 
-@PrepaidInvoiceRouter.get(
+@prepaidinvoiceRouter.get(
     "/number",
     summary = "Get prepaid invoice by number",
     description = "Get prepaid invoice with the tracking number"
@@ -19,7 +23,7 @@ def get_postpaid_invoice_by_number(
     return prepaidInvoiceService.get_prepaid_invoice_by_number(invoice_number)
 
 
-@PrepaidInvoiceRouter.get(
+@prepaidinvoiceRouter.get(
     "/contract_number",
     summary = "Get prepaid invoice by contract number",
     description = "Get prepaid invoice with the contract number"
@@ -33,7 +37,7 @@ def get_prepaid_invoice_by_contract_number(
     return prepaidInvoiceService.get_prepaid_invoice_by_contract_number(contract_number, offset, limit)
 
 
-@PrepaidInvoiceRouter.get(
+@prepaidinvoiceRouter.get(
     "/contract_number/last",
     summary = "Get last prepaid invoice by contract number",
     description = "Get last prepaid invoice with the contract number"
@@ -45,7 +49,7 @@ def get_last_prepaid_invoice_by_contract_number(
     return prepaidInvoiceService.get_last_prepaid_invoice_by_contract_number(contract_number)
 
 
-@PrepaidInvoiceRouter.delete(
+@prepaidinvoiceRouter.delete(
     "/number",
     summary = "Delete prepaid invoice by number",
     description = "Delete prepaid invoice with the invoice number"

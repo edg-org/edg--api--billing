@@ -4,8 +4,8 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import select, desc
-from api.configs.Database import get_db_connection
 from api.models.Invoice import Invoice
+from api.configs.Database import get_db_connection
 
 
 class InvoiceRepository:
@@ -41,12 +41,12 @@ class InvoiceRepository:
          if is_admin:
              query = select(Invoice).filter(
                  Invoice.infos['invoice_type'].as_string().ilike('%' + invoice_type + '%'),
-                 Invoice.invoice_number.ilike(invoice_number)
+                 Invoice.invoice_number == invoice_number
              )
          else:
              query = select(Invoice).filter(
                  Invoice.infos['invoice_type'].as_string().ilike('%' + invoice_type + '%'),
-                 Invoice.invoice_number.ilike(invoice_number),
+                 Invoice.invoice_number == invoice_number,
                  Invoice.is_activated == True
              )
 

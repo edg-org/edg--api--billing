@@ -7,7 +7,7 @@ from api.configs.Database import get_db_connection
 from api.models.ConsumptionTracking import ConsumptionTracking
 
 
-class ConsumptionTrackingRepository:
+class TrackingRepository:
     db: Session
 
     def __init__(
