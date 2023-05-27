@@ -18,7 +18,7 @@ services:
   db:
     image: mysql:8.0
     ports:
-      - "3306:3306"
+      - "3310:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./scripts/sql/:/docker-entrypoint-initdb.d/
