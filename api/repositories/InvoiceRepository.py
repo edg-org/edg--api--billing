@@ -1,12 +1,10 @@
-from typing import List, Optional
-
 from fastapi import Depends
+from typing import List, Optional
 from sqlalchemy.orm import Session
-from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import select, desc
 from api.models.Invoice import Invoice
+from sqlalchemy.exc import SQLAlchemyError
 from api.configs.Database import get_db_connection
-
 
 class InvoiceRepository:
     db: Session
@@ -16,25 +14,21 @@ class InvoiceRepository:
     ) -> None:
         self.db = db
 
-
     # create invoices
     def create_invoices(self, invoices: List[Invoice]) -> List[Invoice]:
         self.db.add_all(invoices)
         self.db.commit()
         return invoices
 
-
     # update invoice
     def update_invoice(self, invoice: Invoice) -> None:
         self.db.merge(invoice)
         self.db.commit()
 
-
     # delete invoice : meaning deactivate the invoice
     def delete_invoice(self, invoice: Invoice) -> None:
         self.db.merge(invoice)
         self.db.commit()
-
 
     # get invoice by number
     def get_invoice_by_number(self, invoice_type: str, invoice_number: str, is_admin: bool) -> Optional[Invoice]:
@@ -51,7 +45,6 @@ class InvoiceRepository:
              )
 
          return self.db.scalars(query).first()
-
 
     # get invoice by contract number
     def get_invoice_by_contract_number(
@@ -74,7 +67,6 @@ class InvoiceRepository:
              ).offset(offset).limit(limit)
 
          return self.db.scalars(query).all()
-
 
     # get last invoice by contract number
     def get_last_invoice_by_contract_number(self, invoice_type: str, contract_number: str, is_admin: bool) -> Invoice:

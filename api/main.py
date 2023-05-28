@@ -24,6 +24,5 @@ app.include_router(postpaidinvoiceRouter)
 app.include_router(prepaidtrackingRouter)
 app.include_router(prepaidinvoiceRouter)
 
-
 # Initialise Data Model Attributes
 init()

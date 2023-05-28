@@ -25,19 +25,19 @@ def create_postpaid_invoices(
 
 
 @postpaidinvoiceRouter.get(
-    "/number",
+    "/{number}",
     summary = "Get postpaid invoice by number",
     description = "Get postpaid invoice with the tracking number"
 )
 def get_postpaid_invoice_by_number(
-    invoice_number: str,
+    number: str,
     postpaidInvoiceService: PostpaidInvoiceService = Depends()
 ):
-    return postpaidInvoiceService.get_postpaid_invoice_by_number(invoice_number)
+    return postpaidInvoiceService.get_postpaid_invoice_by_number(number)
 
 
 @postpaidinvoiceRouter.get(
-    "/contract_number",
+    "/{contract_number}",
     summary = "Get postpaid invoice by contract number",
     description = "Get postpaid invoice with the contract number"
 )
@@ -51,7 +51,7 @@ def get_postpaid_invoices_by_contract_number(
 
 
 @postpaidinvoiceRouter.get(
-    "/contract_number/last",
+    "/{contract_number}/last",
     summary = "Get last postpaid invoice by contract number",
     description = "Get last postpaid invoice with the contract number"
 )
@@ -75,12 +75,12 @@ def dunning_postpaid_invoice_by_number(
 
 
 @postpaidinvoiceRouter.delete(
-    "/number",
+    "/{number}",
     summary = "Delete postpaid invoice by number",
     description = "Delete postpaid invoice with the invoice number"
 )
 def delete_postpaid_invoice_by_number(
-    invoice_number: str,
+    number: str,
     postpaidInvoiceService: PostpaidInvoiceService = Depends()
 ):
-    postpaidInvoiceService.delete_postpaid_invoice_by_number(invoice_number)
+    postpaidInvoiceService.delete_postpaid_invoice_by_number(number)

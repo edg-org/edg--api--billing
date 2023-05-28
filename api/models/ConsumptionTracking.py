@@ -21,13 +21,3 @@ class ConsumptionTracking(EntityMeta):
     updated_at: Mapped[datetime] = mapped_column(nullable = True)
     deleted_at: Mapped[datetime] = mapped_column(nullable = True)
     invoices: Mapped[List["Invoice"]] = relationship(backref = "tracking")
-
-    #__table_args__ = {
-    #    'info': {
-    #        'mysql_partition': """
-    #             PARTITION BY HASH(tracking_date)
-    #         """
-    #    }
-    #}
-
-

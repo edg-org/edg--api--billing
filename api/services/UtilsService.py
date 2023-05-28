@@ -12,4 +12,3 @@ class UtilsService:
     @classmethod
     def generate_uuid(cls) -> str:
         return str(uuid.uuid4())
-

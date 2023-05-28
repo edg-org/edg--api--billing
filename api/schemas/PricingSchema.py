@@ -7,14 +7,12 @@ class Slice(BaseModel):
     upper_index: float
     unit_price: float
 
-
 class PostpaidPricing(BaseModel):
     domestic: List[Slice]
     private_level1: List[Slice]
     private_level2: List[Slice]
     institution: List[Slice]
     administration: List[Slice]
-
 
 class PrepaidPricing(BaseModel):
     domestic_level1: List[Slice]

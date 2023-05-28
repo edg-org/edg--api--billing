@@ -1,17 +1,16 @@
-from typing import List, Optional
 from fastapi import Depends
+from datetime import datetime
+from typing import List, Optional
 from api.models.Invoice import Invoice
+from fastapi.encoders import jsonable_encoder
+from api.services.UtilsService import UtilsService
+from api.services.PricingService import PricingService
+from api.services.InvoiceService import InvoiceService
+from api.schemas.InvoiceSchema import PrepaidInfoSchema
+from api.services.ExceptionService import ExceptionService
 from api.models.ConsumptionTracking import ConsumptionTracking
 from api.repositories.InvoiceRepository import InvoiceRepository
-from datetime import datetime
-from api.services.InvoiceService import InvoiceService
-from api.services.ExceptionService import ExceptionService
 from api.services.PrepaidTrackingService import PrepaidTrackingService
-from api.schemas.InvoiceSchema import PrepaidInfoSchema
-from api.services.UtilsService import UtilsService
-from fastapi.encoders import jsonable_encoder
-from api.services.PricingService import PricingService
-
 
 class PrepaidInvoiceService(InvoiceService):
     invoiceRepository: InvoiceRepository
@@ -54,7 +53,6 @@ class PrepaidInvoiceService(InvoiceService):
             total_power_recharged = tracking.infos['total_power_recharged'],
             details = []
         )
-
 
     def create_prepaid_invoices(self, tracking_number_list: list[str]) -> List[str]:
         """
@@ -99,7 +97,6 @@ class PrepaidInvoiceService(InvoiceService):
         """
         self._delete_invoice(UtilsService.PREPAID, invoice_number)
 
-
     def get_prepaid_invoice_by_number(self, invoice_number: str)-> Invoice:
         """
         Get prepaid invoice by number.
@@ -111,7 +108,6 @@ class PrepaidInvoiceService(InvoiceService):
             Invoice
         """
         return self._get_invoice_by_number(UtilsService.PREPAID, invoice_number)
-
 
     def get_prepaid_invoice_by_contract_number(self, contract_number: str, offset: int, limit: int)-> List[Invoice]:
         """
@@ -126,7 +122,6 @@ class PrepaidInvoiceService(InvoiceService):
             Invoice
         """
         return self._get_invoice_by_contract_number(UtilsService.PREPAID, contract_number, offset, limit)
-
 
     def get_last_prepaid_invoice_by_contract_number(self, contract_number: str)-> Invoice:
         """

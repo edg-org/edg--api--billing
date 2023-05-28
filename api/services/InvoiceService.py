@@ -1,8 +1,8 @@
-from typing import List, Optional
-from fastapi import Depends, HTTPException
-from api.models.Invoice import Invoice
-from api.repositories.InvoiceRepository import InvoiceRepository
 from datetime import datetime
+from typing import List, Optional
+from api.models.Invoice import Invoice
+from fastapi import Depends, HTTPException
+from api.repositories.InvoiceRepository import InvoiceRepository
 
 class InvoiceService:
     invoiceRepository: InvoiceRepository
@@ -12,7 +12,6 @@ class InvoiceService:
         invoiceRepository: InvoiceRepository = Depends()
     ) -> None:
         self.invoiceRepository = invoiceRepository
-
 
     def _get_invoice_by_number(self, invoice_type: str, invoice_number: str) -> Optional[Invoice]:
         """
@@ -30,7 +29,6 @@ class InvoiceService:
             invoice_number = invoice_number,
             is_admin = True # TODO: this parameter depends up user scope (admin or not admin).
         )
-
 
     def _delete_invoice(self, invoice_type: str, invoice_number: str) -> None:
         """
@@ -51,7 +49,6 @@ class InvoiceService:
         invoice.updated_at = invoice.deleted_at = datetime.now()
         self.invoiceRepository.delete_invoice(invoice)
 
-
     def _get_invoice_by_contract_number(self, invoice_type: str, contract_number: str, offset: int, limit: int) -> List[Invoice]:
         """
         Get invoice by contract number.
@@ -71,7 +68,6 @@ class InvoiceService:
             limit = limit,
             is_admin = True # TODO: this parameter depends up user scope (admin or not admin).
         )
-
 
     def _get_last_invoice_by_contract_number(self, invoice_type: str, contract_number: str) -> Invoice:
         """

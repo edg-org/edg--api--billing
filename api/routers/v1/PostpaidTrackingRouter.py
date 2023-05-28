@@ -26,19 +26,19 @@ def create_postpaid_tracking(
 
 
 @postpaidtrackingRouter.get(
-    "/number",
+    "/{number}",
     summary = "Get postpaid tracking by number",
     description = "Get postpaid tracking with the tracking number"
 )
 def get_postpaid_tracking_by_number(
-    tracking_number: str,
+    number: str,
     postpaidTrackingService: PostpaidTrackingService = Depends()
 ):
-    return postpaidTrackingService.get_postpaid_tracking_by_number(tracking_number)
+    return postpaidTrackingService.get_postpaid_tracking_by_number(number)
 
 
 @postpaidtrackingRouter.get(
-    "/contract_number",
+    "/{contract_number}",
     summary = "Get postpaid tracking by contract number",
     description = "Get postpaid tracking with the contract number"
 )
@@ -52,7 +52,7 @@ def get_postpaid_tracking_by_contract_number(
 
 
 @postpaidtrackingRouter.get(
-    "/contract_number/last",
+    "/{contract_number}/last",
     summary = "Get last postpaid tracking by contract number",
     description = "Get last postpaid tracking with the contract number"
 )
@@ -64,12 +64,12 @@ def get_last_postpaid_tracking_by_contract_number(
 
 
 @postpaidtrackingRouter.delete(
-    "/number",
+    "/{number}",
     summary = "Delete postpaid tracking by number",
     description = "Delete postpaid tracking with the tracking number"
 )
 def delete_postpaid_tracking_by_number(
-    tracking_number: str,
+    number: str,
     postpaidTrackingService: PostpaidTrackingService = Depends()
 ):
-    postpaidTrackingService.delete_postpaid_tracking_by_number(tracking_number)
+    postpaidTrackingService.delete_postpaid_tracking_by_number(number)

@@ -6,7 +6,6 @@ class ConsumptionBaseSchema(BaseModel):
     tracking_type: str
     is_invoiced: bool
 
-
 class PrepaidInfoSchema(ConsumptionBaseSchema):
     power_recharged: float
     power_recharged_date: str
@@ -15,7 +14,6 @@ class PrepaidInfoSchema(ConsumptionBaseSchema):
     total_power_recharged: float
     tracking_type = "prepaid"
     is_invoiced = True
-
 
 class PostpaidInfoSchema(ConsumptionBaseSchema):
     index_value: float
@@ -28,15 +26,12 @@ class PostpaidInfoSchema(ConsumptionBaseSchema):
     tracking_type = "manual postpaid"
     is_invoiced = False
 
-
 class PrepaidCreateSchema(BaseModel):
     contract_number: str
     power_recharged: float
     power_recharged_date: str
 
-
 class PostpaidCreateSchema(BaseModel):
     contract_number: str
     index_value: float
     index_date: str
-

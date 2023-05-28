@@ -21,14 +21,12 @@ class Dunning(BaseModel):
     total_amount_ttc: float
     payment_deadline: int
 
-
 class PrepaidInfoSchema(InvoiceBaseSchema):
     power_recharged: float
     last_power_recharged: float
     total_power_recharged: float
     status = "paid"
     invoice_type = "prepaid"
-
 
 class PostpaidInfoSchema(InvoiceBaseSchema):
     index_value: float

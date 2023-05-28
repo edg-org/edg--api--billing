@@ -1,14 +1,13 @@
-from typing import List, Optional
 from fastapi import Depends
+from datetime import datetime
+from pydantic import parse_obj_as
+from typing import List, Optional
+from fastapi.encoders import jsonable_encoder
+from api.services.UtilsService import UtilsService
+from api.services.TrackingService import TrackingService
 from api.models.ConsumptionTracking import ConsumptionTracking
 from api.repositories.TrackingRepository import TrackingRepository
 from api.schemas.TrackingSchema import PostpaidCreateSchema, PostpaidInfoSchema
-from datetime import datetime
-from api.services.TrackingService import TrackingService
-from api.services.UtilsService import UtilsService
-from pydantic import parse_obj_as
-from fastapi.encoders import jsonable_encoder
-
 
 class PostpaidTrackingService(TrackingService):
     consumptionTrackingRepository: TrackingRepository
@@ -19,7 +18,6 @@ class PostpaidTrackingService(TrackingService):
     ) -> None:
         super().__init__(consumptionTrackingRepository)
         self.consumptionTrackingRepository = consumptionTrackingRepository
-
 
     def _build_postpaid_info_schema(self, postpaid_schema: PostpaidCreateSchema) -> PostpaidInfoSchema:
          """
@@ -43,7 +41,6 @@ class PostpaidTrackingService(TrackingService):
             total_accumulated_period = postpaid_schema.index_value, # TODO: recalculate
             next_tracking_date = ""
         )
-
 
     def create_postpaid_tracking(self, postpaid_schema_list: List[PostpaidCreateSchema]) -> List[PostpaidCreateSchema]:
          """
@@ -71,7 +68,6 @@ class PostpaidTrackingService(TrackingService):
          self.consumptionTrackingRepository.create_tracking(tracking_list)
          return  created_list
 
-
     def get_postpaid_tracking_by_number(self, tracking_number: str)-> ConsumptionTracking:
         """
         Get postpaid tracking by number.
@@ -84,7 +80,6 @@ class PostpaidTrackingService(TrackingService):
         """
         return self._get_tracking_by_number(UtilsService.POSTPAID, tracking_number)
 
-
     def delete_postpaid_tracking_by_number(self, tracking_number: str)-> None:
         """
         Delete postpaid tracking by number.
@@ -96,7 +91,6 @@ class PostpaidTrackingService(TrackingService):
             None.
         """
         self._delete_tracking(UtilsService.POSTPAID, tracking_number)
-
 
     def get_postpaid_tracking_by_contract_number(self, contract_number: str, offset: int, limit: int)-> List[ConsumptionTracking]:
         """
@@ -112,7 +106,6 @@ class PostpaidTrackingService(TrackingService):
         """
         return self._get_tracking_by_contract_number(UtilsService.POSTPAID, contract_number, offset, limit)
 
-
     def get_last_postpaid_tracking_by_contract_number(self, contract_number: str)-> Optional[ConsumptionTracking]:
         """
         Get last postpaid tracking by contract number.
@@ -125,7 +118,6 @@ class PostpaidTrackingService(TrackingService):
         """
         return self._get_last_tracking_by_contract_number(UtilsService.POSTPAID, contract_number)
 
-
     def get_not_invoiced_postpaid_tracking_by_number(self, tracking_number: str) -> Optional[ConsumptionTracking]:
         """
         Get only not invoiced postpaid tracking by number.
@@ -137,7 +129,6 @@ class PostpaidTrackingService(TrackingService):
             Optional ConsumptionTracking
         """
         return self._get_tracking_by_type_and_number_and_status(UtilsService.POSTPAID, tracking_number, False)
-
 
     def update_postpaid_tracking(self, tracking_list: List[ConsumptionTracking]) -> None:
         """
@@ -155,4 +146,3 @@ class PostpaidTrackingService(TrackingService):
             tracking.infos = jsonable_encoder(infos)
             tracking.updated_at = datetime.now()
             self.consumptionTrackingRepository.update_tracking_postpaid(tracking)
-

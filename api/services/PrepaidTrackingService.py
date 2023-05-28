@@ -1,13 +1,12 @@
-from typing import List, Optional
 from fastapi import Depends
+from datetime import datetime
+from typing import List, Optional
+from fastapi.encoders import jsonable_encoder
+from api.services.UtilsService import UtilsService
+from api.services.TrackingService import TrackingService
 from api.models.ConsumptionTracking import ConsumptionTracking
 from api.repositories.TrackingRepository import TrackingRepository
 from api.schemas.TrackingSchema import PrepaidCreateSchema, PrepaidInfoSchema
-from datetime import datetime
-from api.services.TrackingService import TrackingService
-from api.services.UtilsService import UtilsService
-from fastapi.encoders import jsonable_encoder
-
 
 class PrepaidTrackingService(TrackingService):
     consumptionTrackingRepository: TrackingRepository

@@ -1,18 +1,17 @@
-from typing import List, Optional
 from fastapi import Depends
+from typing import List, Optional
+from pydantic import parse_obj_as
+from datetime import datetime, date
 from api.models.Invoice import Invoice
+from fastapi.encoders import jsonable_encoder
+from api.services.UtilsService import UtilsService
+from api.services.InvoiceService import InvoiceService
+from api.services.PricingService import PricingService
+from api.services.ExceptionService import ExceptionService
 from api.models.ConsumptionTracking import ConsumptionTracking
 from api.repositories.InvoiceRepository import InvoiceRepository
-from datetime import datetime, date
-from api.services.InvoiceService import InvoiceService
-from api.services.ExceptionService import ExceptionService
-from api.services.PostpaidTrackingService import PostpaidTrackingService
 from api.schemas.InvoiceSchema import PostpaidInfoSchema, Dunning
-from api.services.UtilsService import UtilsService
-from pydantic import parse_obj_as
-from fastapi.encoders import jsonable_encoder
-from api.services.PricingService import PricingService
-
+from api.services.PostpaidTrackingService import PostpaidTrackingService
 
 class PostpaidInvoiceService(InvoiceService):
     invoiceRepository: InvoiceRepository
@@ -91,7 +90,6 @@ class PostpaidInvoiceService(InvoiceService):
             dunning = [dunning]
         )
 
-
     def create_postpaid_invoices(self, tracking_number_list: list[str]) -> List[str]:
         """
          Postpaid invoice creation.
@@ -138,7 +136,6 @@ class PostpaidInvoiceService(InvoiceService):
         """
         self._delete_invoice(UtilsService.POSTPAID, invoice_number)
 
-
     def get_postpaid_invoice_by_number(self, invoice_number: str)-> Invoice:
         """
         Get postpaid invoice by number.
@@ -150,7 +147,6 @@ class PostpaidInvoiceService(InvoiceService):
             Invoice
         """
         return self._get_invoice_by_number(UtilsService.POSTPAID, invoice_number)
-
 
     def _update_invoice_for_new_dunning(self, invoice: Invoice, infos: PostpaidInfoSchema, new_dunning: Dunning) -> None:
          """
@@ -171,7 +167,6 @@ class PostpaidInvoiceService(InvoiceService):
          invoice.infos = jsonable_encoder(infos)
          invoice.updated_at = datetime.now()
          self.invoiceRepository.update_invoice(invoice) # update invoice
-
 
     def dunning_postpaid_invoice_by_number(self, invoice_number: str)-> None:
         """
@@ -206,7 +201,6 @@ class PostpaidInvoiceService(InvoiceService):
             new_dunning.total_amount_ttc = new_dunning.total_amount_ht * (1 + UtilsService.VAT)
             new_dunning.payment_deadline = infos.payment_deadline
             self._update_invoice_for_new_dunning(invoice, infos, new_dunning) # update invoice for the new dunning
-
 
     def get_postpaid_invoice_by_contract_number(self, contract_number: str, offset: int, limit: int)-> List[Invoice]:
         """

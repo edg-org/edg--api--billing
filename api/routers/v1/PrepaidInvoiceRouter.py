@@ -12,19 +12,19 @@ prepaidinvoiceRouter = APIRouter(
 )
 
 @prepaidinvoiceRouter.get(
-    "/number",
+    "/{number}",
     summary = "Get prepaid invoice by number",
     description = "Get prepaid invoice with the tracking number"
 )
 def get_postpaid_invoice_by_number(
-    invoice_number: str,
+    number: str,
     prepaidInvoiceService: PrepaidInvoiceService = Depends()
 ):
-    return prepaidInvoiceService.get_prepaid_invoice_by_number(invoice_number)
+    return prepaidInvoiceService.get_prepaid_invoice_by_number(number)
 
 
 @prepaidinvoiceRouter.get(
-    "/contract_number",
+    "/{contract_number}",
     summary = "Get prepaid invoice by contract number",
     description = "Get prepaid invoice with the contract number"
 )
@@ -38,7 +38,7 @@ def get_prepaid_invoice_by_contract_number(
 
 
 @prepaidinvoiceRouter.get(
-    "/contract_number/last",
+    "/{contract_number}/last",
     summary = "Get last prepaid invoice by contract number",
     description = "Get last prepaid invoice with the contract number"
 )
@@ -50,12 +50,12 @@ def get_last_prepaid_invoice_by_contract_number(
 
 
 @prepaidinvoiceRouter.delete(
-    "/number",
+    "/{number}",
     summary = "Delete prepaid invoice by number",
     description = "Delete prepaid invoice with the invoice number"
 )
 def delete_prepaid_invoice_by_number(
-    invoice_number: str,
+    number: str,
     prepaidInvoiceService: PrepaidInvoiceService = Depends()
 ):
-    prepaidInvoiceService.delete_prepaid_invoice_by_number(invoice_number)
+    prepaidInvoiceService.delete_prepaid_invoice_by_number(number)

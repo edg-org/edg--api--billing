@@ -24,13 +24,10 @@ class PricingService:
                institution_level2 = []
             ) # TODO: these data must be to retrieve from referential end-point or from this microservice local table
 
-
     def get_postpaid_unit_price(self, index_value) -> float:
         slice = [slice for slice in self.postpaid_pricing.domestic if slice.lower_index <= index_value <= slice.upper_index][-1]
         return slice.unit_price
 
-
     def get_prepaid_unit_price(self, power_subscriber) -> float:
         slice = [slice for slice in self.prepaid_pricing.domestic_level1 if slice.lower_index <= power_subscriber <= slice.upper_index][-1]
         return slice.unit_price
-

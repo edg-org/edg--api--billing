@@ -1,10 +1,9 @@
-from typing import List, Optional
 from fastapi import Depends
+from datetime import datetime
+from typing import List, Optional
+from api.services.ExceptionService import ExceptionService
 from api.models.ConsumptionTracking import ConsumptionTracking
 from api.repositories.TrackingRepository import TrackingRepository
-from datetime import datetime
-from api.services.ExceptionService import ExceptionService
-
 
 class TrackingService:
     consumptionTrackingRepository: TrackingRepository

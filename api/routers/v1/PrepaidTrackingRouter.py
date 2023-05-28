@@ -26,21 +26,19 @@ def create_prepaid_tracking(
 ):
     return prepaidTrackingService.create_prepaid_tracking(prepaid_list, prepaidInvoiceService)
 
-
 @prepaidtrackingRouter.get(
-    "/number",
+    "/{number}",
     summary = "Get prepaid tracking by number",
     description = "Get prepaid tracking with the tracking number"
 )
 def get_prepaid_tracking_by_number(
-    tracking_number: str,
+    number: str,
     prepaidTrackingService: PrepaidTrackingService = Depends()
 ):
-    return prepaidTrackingService.get_prepaid_tracking_by_number(tracking_number)
-
+    return prepaidTrackingService.get_prepaid_tracking_by_number(number)
 
 @prepaidtrackingRouter.get(
-    "/contract_number",
+    "/{contract_number}",
     summary = "Get prepaid tracking by contract number",
     description = "Get prepaid tracking with the contract number"
 )
@@ -52,9 +50,8 @@ def get_prepaid_by_contract_number(
 ):
     return prepaidTrackingService.get_prepaid_tracking_by_contract_number(contract_number, offset, limit)
 
-
 @prepaidtrackingRouter.get(
-    "/contract_number/last",
+    "/{contract_number}/last",
     summary = "Get last prepaid tracking by contract number",
     description = "Get last prepaid tracking with the contract number"
 )
@@ -64,14 +61,13 @@ def get_last_prepaid_by_contract_number(
 ):
     return prepaidTrackingService.get_last_prepaid_tracking_by_contract_number(contract_number)
 
-
 @prepaidtrackingRouter.delete(
-    "/number",
+    "/{number}",
     summary = "Delete prepaid tracking by number",
     description = "Delete prepaid tracking with the tracking number"
 )
 def delete_postpaid_tracking_by_number(
-    tracking_number: str,
+    number: str,
     prepaidTrackingService: PrepaidTrackingService = Depends()
 ):
-    prepaidTrackingService.delete_prepaid_tracking_by_number(tracking_number)
+    prepaidTrackingService.delete_prepaid_tracking_by_number(number)
