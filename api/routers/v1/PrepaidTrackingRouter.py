@@ -8,12 +8,12 @@ from api.schemas.TrackingSchema import PrepaidCreateSchema, PrepaidInfoSchema
 env = get_env_var()
 router_path = env.api_routers_prefix + env.api_version
 
-prepaidtrackingRouter = APIRouter(
+prepaidTrackingRouter = APIRouter(
     prefix=router_path + "/tracking/prepaid",
     tags=["Prepaid Consumption Tracking"],
 )
 
-@prepaidtrackingRouter.post(
+@prepaidTrackingRouter.post(
     "/",
     status_code = status.HTTP_201_CREATED,
     summary = "Create prepaid tracking",
@@ -26,7 +26,7 @@ def create_prepaid_tracking(
 ):
     return prepaidTrackingService.create_prepaid_tracking(prepaid_list, prepaidInvoiceService)
 
-@prepaidtrackingRouter.get(
+@prepaidTrackingRouter.get(
     "/{number}",
     summary = "Get prepaid tracking by number",
     description = "Get prepaid tracking with the tracking number"
@@ -37,7 +37,7 @@ def get_prepaid_tracking_by_number(
 ):
     return prepaidTrackingService.get_prepaid_tracking_by_number(number)
 
-@prepaidtrackingRouter.get(
+@prepaidTrackingRouter.get(
     "/{contract_number}",
     summary = "Get prepaid tracking by contract number",
     description = "Get prepaid tracking with the contract number"
@@ -50,7 +50,7 @@ def get_prepaid_by_contract_number(
 ):
     return prepaidTrackingService.get_prepaid_tracking_by_contract_number(contract_number, offset, limit)
 
-@prepaidtrackingRouter.get(
+@prepaidTrackingRouter.get(
     "/{contract_number}/last",
     summary = "Get last prepaid tracking by contract number",
     description = "Get last prepaid tracking with the contract number"
@@ -61,7 +61,7 @@ def get_last_prepaid_by_contract_number(
 ):
     return prepaidTrackingService.get_last_prepaid_tracking_by_contract_number(contract_number)
 
-@prepaidtrackingRouter.delete(
+@prepaidTrackingRouter.delete(
     "/{number}",
     summary = "Delete prepaid tracking by number",
     description = "Delete prepaid tracking with the tracking number"

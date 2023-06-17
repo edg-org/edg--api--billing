@@ -7,12 +7,12 @@ from api.schemas.TrackingSchema import PostpaidCreateSchema, PostpaidCreateSchem
 env = get_env_var()
 router_path = env.api_routers_prefix + env.api_version
 
-postpaidtrackingRouter = APIRouter(
+postpaidTrackingRouter = APIRouter(
     prefix=router_path + "/tracking/postpaid",
     tags=["Postpaid Consumption Tracking"],
 )
 
-@postpaidtrackingRouter.post(
+@postpaidTrackingRouter.post(
     "/",
     status_code = status.HTTP_201_CREATED,
     summary = "Create postpaid tracking",
@@ -25,7 +25,7 @@ def create_postpaid_tracking(
     return postpaidTrackingService.create_postpaid_tracking(postpaid_list)
 
 
-@postpaidtrackingRouter.get(
+@postpaidTrackingRouter.get(
     "/{number}",
     summary = "Get postpaid tracking by number",
     description = "Get postpaid tracking with the tracking number"
@@ -37,7 +37,7 @@ def get_postpaid_tracking_by_number(
     return postpaidTrackingService.get_postpaid_tracking_by_number(number)
 
 
-@postpaidtrackingRouter.get(
+@postpaidTrackingRouter.get(
     "/{contract_number}",
     summary = "Get postpaid tracking by contract number",
     description = "Get postpaid tracking with the contract number"
@@ -51,7 +51,7 @@ def get_postpaid_tracking_by_contract_number(
     return postpaidTrackingService.get_postpaid_tracking_by_contract_number(contract_number, offset, limit)
 
 
-@postpaidtrackingRouter.get(
+@postpaidTrackingRouter.get(
     "/{contract_number}/last",
     summary = "Get last postpaid tracking by contract number",
     description = "Get last postpaid tracking with the contract number"
@@ -63,7 +63,7 @@ def get_last_postpaid_tracking_by_contract_number(
     return postpaidTrackingService.get_last_postpaid_tracking_by_contract_number(contract_number)
 
 
-@postpaidtrackingRouter.delete(
+@postpaidTrackingRouter.delete(
     "/{number}",
     summary = "Delete postpaid tracking by number",
     description = "Delete postpaid tracking with the tracking number"
