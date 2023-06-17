@@ -1,0 +1,26 @@
+{
+  "domestic_level1": [
+    {
+      "name": "Slice 1",
+      "lower_index": 1.00,
+      "upper_index": 40.00,
+      "unit_price": 255.00
+    },
+    {
+      "name": "Slice 2",
+      "lower_index": 41.00,
+      "upper_index": 1000000000.00,
+      "unit_price": 347.00
+    }
+  ],
+  "domestic_level2": [
+    {
+      "name": "Slice unique",
+      "lower_index": 1.00,
+      "upper_index": 1000000000.00,
+      "unit_price": 359.00
+    }
+  ],
+  "institution_level1": [],
+  "institution_level2": []
+}

@@ -1,0 +1,26 @@
+{
+  "domestic": [
+    {
+      "name": "Slice 1",
+      "lower_index": 1.00,
+      "upper_index": 40.00,
+      "unit_price": 90.00
+    },
+    {
+      "name": "Slice 2",
+      "lower_index": 41.00,
+      "upper_index": 330.00,
+      "unit_price": 293.00
+    },
+    {
+      "name": "Slice 3",
+      "lower_index": 331.00,
+      "upper_index": 1000000000.00,
+      "unit_price": 336.00
+    }
+  ],
+  "private_level1": [],
+  "private_level2": [],
+  "institution": [],
+  "administration": []
+}
