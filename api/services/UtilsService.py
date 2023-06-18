@@ -28,4 +28,4 @@ class UtilsService:
         except json.JSONDecodeError:
             print("Invalid JSON format!")
             ExceptionService.internal_server_error()
-            
+

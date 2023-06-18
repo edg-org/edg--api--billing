@@ -8,11 +8,30 @@ class PricingService:
             self.prepaid_pricing = parse_obj_as(PrepaidPricing, UtilsService.get_json_data("PrepaidPricing.json"))
 
 
-    def get_postpaid_unit_price(self, index_value) -> float:
-        slice = [slice for slice in self.postpaid_pricing.domestic if slice.lower_index <= index_value <= slice.upper_index][-1]
+    def get_postpaid_unit_price(self, power_consumed) -> float:
+        """
+        Get the postpaid unit price.
+
+        Args:
+            power_consumed: the power of consumed energy.
+
+        Returns:
+            unit price.
+        """
+        slice = [slice for slice in self.postpaid_pricing.domestic if slice.lower_index <= power_consumed <= slice.upper_index][-1]
         return slice.unit_price
 
-    def get_prepaid_unit_price(self, power_subscriber) -> float:
-        slice = [slice for slice in self.prepaid_pricing.domestic_level1 if slice.lower_index <= power_subscriber <= slice.upper_index][-1]
+
+    def get_prepaid_unit_price(self, power_subscribed) -> float:
+        """
+        Get the prepaid unit price.
+
+        Args:
+            power_subscribed: the power of subscribed energy.
+
+        Returns:
+            unit price.
+        """
+        slice = [slice for slice in self.prepaid_pricing.domestic_level1 if slice.lower_index <= power_subscribed <= slice.upper_index][-1]
         return slice.unit_price
-    
+
