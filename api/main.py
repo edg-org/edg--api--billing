@@ -1,11 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from api.metadata.Tags import Tags
 from api.configs.BaseModel import init
 from api.configs.Environment import get_env_var
-from api.routers.v1.PrepaidInvoiceRouter import prepaidinvoiceRouter
-from api.routers.v1.PostpaidInvoiceRouter import postpaidinvoiceRouter
-from api.routers.v1.PrepaidTrackingRouter import prepaidtrackingRouter
-from api.routers.v1.PostpaidTrackingRouter import postpaidtrackingRouter
+from api.routers.v1.PrepaidInvoiceRouter import prepaidInvoiceRouter
+from api.routers.v1.PostpaidInvoiceRouter import postpaidInvoiceRouter
+from api.routers.v1.PrepaidTrackingRouter import prepaidTrackingRouter
+from api.routers.v1.PostpaidTrackingRouter import postpaidTrackingRouter
+from api.tools.JWTBearer import JWTBearer
 
 # Application Environment Configuration
 env = get_env_var()
@@ -16,13 +17,14 @@ app = FastAPI(
     description=env.app_desc,
     version="0.0." + env.api_version,
     openapi_tags=Tags,
+    dependencies=[Depends(JWTBearer())]
 )
 
 # Add Routers
-app.include_router(postpaidtrackingRouter)
-app.include_router(postpaidinvoiceRouter)
-app.include_router(prepaidtrackingRouter)
-app.include_router(prepaidinvoiceRouter)
+app.include_router(prepaidTrackingRouter)
+app.include_router(postpaidTrackingRouter)
+app.include_router(prepaidInvoiceRouter)
+app.include_router(postpaidInvoiceRouter)
 
 # Initialise Data Model Attributes
 init()

@@ -61,6 +61,7 @@ class PrepaidTrackingService(TrackingService):
             prepaid_info_schema = self._build_prepaid_info_schema(prepaid_schema)
             tracking = ConsumptionTracking(
                 tracking_number = UtilsService.generate_uuid(),
+                tracking_date = datetime.now(), # TODO: build tracking date from request data.
                 infos = jsonable_encoder(prepaid_info_schema)
             )
             tracking_list.append(tracking)

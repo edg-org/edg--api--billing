@@ -39,7 +39,7 @@ class PostpaidTrackingService(TrackingService):
             last_index_date = "" if last_tracking is None else last_tracking.infos['index_date'],
             total_power_consumed = postpaid_schema.index_value if last_tracking is None else last_tracking.infos['total_power_consumed'] + postpaid_schema.index_value,
             total_accumulated_period = postpaid_schema.index_value, # TODO: recalculate
-            next_tracking_date = ""
+            next_tracking_date = "" # TODO: to review
         )
 
     def create_postpaid_tracking(self, postpaid_schema_list: List[PostpaidCreateSchema]) -> List[PostpaidCreateSchema]:
@@ -60,6 +60,7 @@ class PostpaidTrackingService(TrackingService):
              postpaid_info_schema = self._build_postpaid_info_schema(postpaid_schema)
              tracking = ConsumptionTracking(
                  tracking_number = UtilsService.generate_uuid(),
+                 tracking_date = datetime.now(), # TODO: build tracking date from request data.
                  infos = jsonable_encoder(postpaid_info_schema)
              )
              tracking_list.append(tracking)

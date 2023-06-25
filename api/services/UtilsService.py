@@ -1,5 +1,6 @@
 import uuid
 import json
+from pathlib import Path
 from api.services.ExceptionService import ExceptionService
 
 class UtilsService:
@@ -20,7 +21,8 @@ class UtilsService:
     @classmethod
     def get_json_data(cls, file_name: str):
         try:
-            with open('../data/' + file_name, 'r') as file:
+            file_path = Path(__file__).resolve().parent / 'data' / file_name
+            with open(file_path, 'r') as file:
                 return json.load(file)
         except FileNotFoundError:
             print("File not found!")
