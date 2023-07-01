@@ -1,8 +1,9 @@
 from datetime import datetime
 from typing import List, Optional
 from api.models.Invoice import Invoice
-from fastapi import Depends, HTTPException
+from fastapi import Depends
 from api.repositories.InvoiceRepository import InvoiceRepository
+from api.services.ExceptionService import ExceptionService
 
 class InvoiceService:
     invoiceRepository: InvoiceRepository

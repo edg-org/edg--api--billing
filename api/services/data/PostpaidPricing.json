@@ -1,0 +1,60 @@
+{
+  "domestic": [
+    {
+      "name": "Slice 1 : single phase 4850",
+      "lower_index": 1.00,
+      "upper_index": 40.00,
+      "unit_price": 90.00
+    },
+    {
+      "name": "Slice 2 : three phase 14550",
+      "lower_index": 41.00,
+      "upper_index": 330.00,
+      "unit_price": 293.00
+    },
+    {
+      "name": "Slice 3 : three phase 14550",
+      "lower_index": 331.00,
+      "upper_index": 1000000000.00,
+      "unit_price": 336.00
+    }
+  ],
+  "private_level1": [
+    {
+      "name": "Slice 1 : single phase 5240",
+      "lower_index": 1.00,
+      "upper_index": 330.00,
+      "unit_price": 1050.00
+    },
+    {
+      "name": "Slice 2 : three phase 15720",
+      "lower_index": 331.00,
+      "upper_index": 1000000000.00,
+      "unit_price": 1638.00
+    }
+  ],
+  "private_level2": [
+    {
+      "name": "Unique slice",
+      "lower_index": 1.00,
+      "upper_index": 1000000000.00,
+      "unit_price": 1638.00
+    }
+  ],
+  "institution": [
+    {
+      "name": "Unique slice",
+      "lower_index": 1.00,
+      "upper_index": 1000000000.00,
+      "unit_price": 2500.00
+    }
+  ],
+  "administration": [
+    {
+      "name": "Unique slice",
+      "lower_index": 1.00,
+      "upper_index": 1000000000.00,
+      "unit_price": 2295.00
+    }
+  ]
+}

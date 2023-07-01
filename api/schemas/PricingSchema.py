@@ -17,5 +17,5 @@ class PostpaidPricing(BaseModel):
 class PrepaidPricing(BaseModel):
     domestic_level1: List[Slice]
     domestic_level2: List[Slice]
-    institution_level1: List[Slice]
-    institution_level2: List[Slice]
+    professional_level1: List[Slice]
+    professional_level2: List[Slice]

@@ -110,6 +110,7 @@ class PostpaidInvoiceService(InvoiceService):
                 invoice = Invoice(
                     tracking_id = tracking.id,
                     invoice_number = UtilsService.generate_uuid(),
+                    invoice_date = datetime.now(),
                     infos = jsonable_encoder(self.build_postpaid_info_schema(tracking))
                 )
                 invoices.append(invoice)
