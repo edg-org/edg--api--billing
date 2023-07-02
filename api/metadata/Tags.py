@@ -1,10 +1,18 @@
 Tags = [
     {
-        "name": "author",
-        "description": "Contains CRUD operation on Authors",
+        "name": "Postpaid Consumption Tracking",
+        "description": "Contains CRUD operation on postpaid consumption tracking",
     },
     {
-        "name": "book",
-        "description": "Contains CRUD operation on Books",
+        "name": "Prepaid Consumption Tracking",
+        "description": "Contains CRUD operation on prepaid consumption tracking",
     },
+    {
+        "name": "Postpaid Invoicing",
+        "description": "Contains CRUD operation on postpaid invoicing",
+    },
+    {
+        "name": "Prepaid Invoicing",
+        "description": "Contains CRUD operation on prepaid invoicing",
+    }
 ]
