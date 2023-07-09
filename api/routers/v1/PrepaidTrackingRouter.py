@@ -38,7 +38,7 @@ def get_prepaid_tracking_by_number(
     return prepaidTrackingService.get_prepaid_tracking_by_number(number)
 
 @prepaidTrackingRouter.get(
-    "/{contract_number}",
+    "/{contract_number}/search",
     summary = "Get prepaid tracking by contract number",
     description = "Get prepaid tracking with the contract number"
 )
@@ -51,7 +51,7 @@ def get_prepaid_by_contract_number(
     return prepaidTrackingService.get_prepaid_tracking_by_contract_number(contract_number, offset, limit)
 
 @prepaidTrackingRouter.get(
-    "/{contract_number}/last",
+    "/{contract_number}/search/last",
     summary = "Get last prepaid tracking by contract number",
     description = "Get last prepaid tracking with the contract number"
 )

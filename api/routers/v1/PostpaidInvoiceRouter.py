@@ -37,7 +37,7 @@ def get_postpaid_invoice_by_number(
 
 
 @postpaidInvoiceRouter.get(
-    "/{contract_number}",
+    "/{contract_number}/search",
     summary = "Get postpaid invoice by contract number",
     description = "Get postpaid invoice with the contract number"
 )
@@ -51,7 +51,7 @@ def get_postpaid_invoices_by_contract_number(
 
 
 @postpaidInvoiceRouter.get(
-    "/{contract_number}/last",
+    "/{contract_number}/search/last",
     summary = "Get last postpaid invoice by contract number",
     description = "Get last postpaid invoice with the contract number"
 )
@@ -63,7 +63,7 @@ def get_last_postpaid_invoice_by_contract_number(
 
 
 @postpaidInvoiceRouter.get(
-    "/dunning",
+    "/dunning/invoice",
     summary = "Dunning postpaid invoice by invoice number",
     description = "Dunning postpaid invoice with the invoice number"
 )

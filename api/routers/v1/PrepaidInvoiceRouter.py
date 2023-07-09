@@ -24,7 +24,7 @@ def get_postpaid_invoice_by_number(
 
 
 @prepaidInvoiceRouter.get(
-    "/{contract_number}",
+    "/{contract_number}/search",
     summary = "Get prepaid invoice by contract number",
     description = "Get prepaid invoice with the contract number"
 )
@@ -38,7 +38,7 @@ def get_prepaid_invoice_by_contract_number(
 
 
 @prepaidInvoiceRouter.get(
-    "/{contract_number}/last",
+    "/{contract_number}/search/last",
     summary = "Get last prepaid invoice by contract number",
     description = "Get last prepaid invoice with the contract number"
 )

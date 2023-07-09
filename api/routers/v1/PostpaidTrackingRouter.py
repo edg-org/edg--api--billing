@@ -38,7 +38,7 @@ def get_postpaid_tracking_by_number(
 
 
 @postpaidTrackingRouter.get(
-    "/{contract_number}",
+    "/{contract_number}/search",
     summary = "Get postpaid tracking by contract number",
     description = "Get postpaid tracking with the contract number"
 )
@@ -52,7 +52,7 @@ def get_postpaid_tracking_by_contract_number(
 
 
 @postpaidTrackingRouter.get(
-    "/{contract_number}/last",
+    "/{contract_number}/search/last",
     summary = "Get last postpaid tracking by contract number",
     description = "Get last postpaid tracking with the contract number"
 )
